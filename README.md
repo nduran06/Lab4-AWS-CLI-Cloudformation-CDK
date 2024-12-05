@@ -75,6 +75,10 @@ aws configure get region
 
 1. Save the default template used by the CDK bootstrap process to a file (bootstrap-template.yaml in this case):
 
+```
+cdk bootstrap --show-template > bootstrap-template.yml
+```
+
 ![](imgs/cdk_8.png)  
 
 2. Comment on these *Resorces* (and their features):
@@ -200,7 +204,7 @@ cdk synth
 3.  Add the role config to your lambda function:
 
 ```
-.role(Role.fromRoleArn(this, "LabRole", "YOUT_ARN_VALUE"))
+.role(Role.fromRoleArn(this, "LabRole", "YOUR_ARN_VALUE"))
 ```
 ```
 public HelloCdkStack(final Construct scope, final String id, final StackProps props) {

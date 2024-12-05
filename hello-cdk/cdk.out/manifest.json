@@ -1,0 +1,90 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "HelloCdkStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "HelloCdkStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "HelloCdkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://645349541441/us-east-1",
+      "properties": {
+        "templateFile": "HelloCdkStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::645349541441:role/cdk-hnb659fds-deploy-role-645349541441-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::645349541441:role/cdk-hnb659fds-cfn-exec-role-645349541441-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-645349541441-us-east-1/5ca40944f0e82b2195b7c2278a651828ee2fabb8d92765cde34319bb075f2832.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "HelloCdkStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::645349541441:role/cdk-hnb659fds-lookup-role-645349541441-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "HelloCdkStack.assets"
+      ],
+      "metadata": {
+        "/HelloCdkStack/HelloWorldFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HelloWorldFunctionB2AB6E79"
+          }
+        ],
+        "/HelloCdkStack/HelloWorldFunction/FunctionUrl/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HelloWorldFunctionFunctionUrl4150BDAD"
+          }
+        ],
+        "/HelloCdkStack/HelloWorldFunction/invoke-function-url": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HelloWorldFunctioninvokefunctionurlA2CB1A84"
+          }
+        ],
+        "/HelloCdkStack/myFunctionUrlOutput": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "myFunctionUrlOutput"
+          }
+        ],
+        "/HelloCdkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/HelloCdkStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/HelloCdkStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "HelloCdkStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

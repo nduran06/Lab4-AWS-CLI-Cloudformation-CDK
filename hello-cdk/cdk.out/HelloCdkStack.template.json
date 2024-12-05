@@ -1,0 +1,103 @@
+{
+ "Resources": {
+  "HelloWorldFunctionB2AB6E79": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "ZipFile": "exports.handler = async function(event) {\n  const queryParams = event.queryStringParameters || {};\n  const { param1, param2, param3 } = queryParams;\n\n  const response = {\n    message: '✨✨✨ Fantasy Response ✨✨✨',\n    story: '🦄🧝🌟 In the enchanted woods of ' + (param1 || 'Oaken Glade') + ', near the borders of the mortal lands. ' +\n           'Dwelt the last of the ' + (param2 || 'unicorns') + ', its coat shimmering like fresh snow in moonlight. ' +\n           'The ancient ' + (param3 || 'Starweaver') + ' elves spoke of how this majestic being was born in the First Age. ' +\n           'When magic still flowed freely through the world like morning dew. ' +\n           'No hunter had ever caught her, no dragon had ever tasted her blood. ' +\n           'And no spell nor enchantment had ever touched her. ' +\n           'For she was the last of the True Immortals who remembered the worlds morning. ' +\n           'The very trees bowed their branches as she passed. ' +\n           'And even the most ancient of the woodland creatures whispered her true name in reverence. 🦄🧝🌟',\n    attribution: 'Inspired by \"The Last Unicorn\" by Peter S. Beagle and \"The Silmarillion\" by J.R.R. Tolkien',\n    footer: '✨🌈✨ Made with magic ✨🌈✨'\n  };\n\n  return {\n    statusCode: 200,\n    headers: {\n      'Content-Type': 'application/json',\n      'Access-Control-Allow-Origin': '*'\n    },\n    body: JSON.stringify(response)\n  };\n};"
+    },
+    "Handler": "index.handler",
+    "Role": "arn:aws:iam::645349541441:role/LabRole",
+    "Runtime": "nodejs20.x"
+   },
+   "Metadata": {
+    "aws:cdk:path": "HelloCdkStack/HelloWorldFunction/Resource"
+   }
+  },
+  "HelloWorldFunctionFunctionUrl4150BDAD": {
+   "Type": "AWS::Lambda::Url",
+   "Properties": {
+    "AuthType": "NONE",
+    "TargetFunctionArn": {
+     "Fn::GetAtt": [
+      "HelloWorldFunctionB2AB6E79",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "HelloCdkStack/HelloWorldFunction/FunctionUrl/Resource"
+   }
+  },
+  "HelloWorldFunctioninvokefunctionurlA2CB1A84": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunctionUrl",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "HelloWorldFunctionB2AB6E79",
+      "Arn"
+     ]
+    },
+    "FunctionUrlAuthType": "NONE",
+    "Principal": "*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "HelloCdkStack/HelloWorldFunction/invoke-function-url"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/z2MOw7CMBAFz5LeXjCRyAGQKGiIglKjjWOkJf4gr02KKHdHFoRq5k3xDqCODagKZ5Z6nKSlAZZbQj2JznDIURuBM98tumFEWM7Z60TBi9PD/32TPtrSf2hNdMRMwa9lXnN65VRsO17FBd+4Uw3sQdXVk4lkzD6RM9B9+QEMi9cfnwAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "HelloCdkStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "myFunctionUrlOutput": {
+   "Value": {
+    "Fn::GetAtt": [
+     "HelloWorldFunctionFunctionUrl4150BDAD",
+     "FunctionUrl"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

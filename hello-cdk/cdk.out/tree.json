@@ -1,0 +1,162 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "HelloCdkStack": {
+        "id": "HelloCdkStack",
+        "path": "HelloCdkStack",
+        "children": {
+          "LabRole": {
+            "id": "LabRole",
+            "path": "HelloCdkStack/LabRole",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.167.1"
+            }
+          },
+          "HelloWorldFunction": {
+            "id": "HelloWorldFunction",
+            "path": "HelloCdkStack/HelloWorldFunction",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "HelloCdkStack/HelloWorldFunction/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "zipFile": "exports.handler = async function(event) {\n  const queryParams = event.queryStringParameters || {};\n  const { param1, param2, param3 } = queryParams;\n\n  const response = {\n    message: '✨✨✨ Fantasy Response ✨✨✨',\n    story: '🦄🧝🌟 In the enchanted woods of ' + (param1 || 'Oaken Glade') + ', near the borders of the mortal lands. ' +\n           'Dwelt the last of the ' + (param2 || 'unicorns') + ', its coat shimmering like fresh snow in moonlight. ' +\n           'The ancient ' + (param3 || 'Starweaver') + ' elves spoke of how this majestic being was born in the First Age. ' +\n           'When magic still flowed freely through the world like morning dew. ' +\n           'No hunter had ever caught her, no dragon had ever tasted her blood. ' +\n           'And no spell nor enchantment had ever touched her. ' +\n           'For she was the last of the True Immortals who remembered the worlds morning. ' +\n           'The very trees bowed their branches as she passed. ' +\n           'And even the most ancient of the woodland creatures whispered her true name in reverence. 🦄🧝🌟',\n    attribution: 'Inspired by \"The Last Unicorn\" by Peter S. Beagle and \"The Silmarillion\" by J.R.R. Tolkien',\n    footer: '✨🌈✨ Made with magic ✨🌈✨'\n  };\n\n  return {\n    statusCode: 200,\n    headers: {\n      'Content-Type': 'application/json',\n      'Access-Control-Allow-Origin': '*'\n    },\n    body: JSON.stringify(response)\n  };\n};"
+                    },
+                    "handler": "index.handler",
+                    "role": "arn:aws:iam::645349541441:role/LabRole",
+                    "runtime": "nodejs20.x"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.167.1"
+                }
+              },
+              "FunctionUrl": {
+                "id": "FunctionUrl",
+                "path": "HelloCdkStack/HelloWorldFunction/FunctionUrl",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "HelloCdkStack/HelloWorldFunction/FunctionUrl/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Url",
+                      "aws:cdk:cloudformation:props": {
+                        "authType": "NONE",
+                        "targetFunctionArn": {
+                          "Fn::GetAtt": [
+                            "HelloWorldFunctionB2AB6E79",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnUrl",
+                      "version": "2.167.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.FunctionUrl",
+                  "version": "2.167.1"
+                }
+              },
+              "invoke-function-url": {
+                "id": "invoke-function-url",
+                "path": "HelloCdkStack/HelloWorldFunction/invoke-function-url",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunctionUrl",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "HelloWorldFunctionB2AB6E79",
+                        "Arn"
+                      ]
+                    },
+                    "functionUrlAuthType": "NONE",
+                    "principal": "*"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.167.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.167.1"
+            }
+          },
+          "myFunctionUrlOutput": {
+            "id": "myFunctionUrlOutput",
+            "path": "HelloCdkStack/myFunctionUrlOutput",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.167.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "HelloCdkStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "HelloCdkStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.167.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "HelloCdkStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.167.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "HelloCdkStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.167.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.167.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.4.2"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.167.1"
+    }
+  }
+}
